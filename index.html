@@ -130,6 +130,36 @@
             background-color: #ffffff;
         }
 
+        /* Animated RGB Title Styling */
+        .rgb-title {
+            font-size: clamp(1.8rem, 5vw, 2.8rem);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 25px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(15px);
+            transition: opacity 0.8s ease 0.2s, transform 0.8s ease 0.2s; /* Delays slightly for a layered entrance */
+            
+            /* Gradient Background Logic for RGB effect */
+            background: linear-gradient(to right, #ff007f, #7f00ff, #00f0ff, #ff007f);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: rgbShift 3s linear infinite;
+        }
+
+        @keyframes rgbShift {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
+        .white-screen.active .rgb-title {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         /* Premium Minimalist Button Design */
         .minimal-action-btn {
             padding: 15px 44px;
@@ -144,7 +174,7 @@
             cursor: pointer;
             opacity: 0;
             transform: translateY(15px);
-            transition: opacity 0.8s ease, transform 0.8s ease, background-color 0.3s ease, color 0.3s ease;
+            transition: opacity 0.8s ease 0.4s, transform 0.8s ease 0.4s, background-color 0.3s ease, color 0.3s ease;
             box-shadow: 0 15px 30px rgba(0,0,0,0.08);
         }
 
@@ -186,11 +216,12 @@
 
     <!-- SCREEN 4: Final High-End Target Portal -->
     <div id="screen-download" class="stage-overlay white-screen">
+        <h1 class="rgb-title">upgrade to AI finance!</h1>
         <button class="minimal-action-btn" onclick="triggerDeployment()">Download APK</button>
     </div>
 
     <script>
-        // Updated Target APK Remote Drive Link Destination
+        // Target APK Remote Drive Link Destination
         const apkSecureEndpoint = "https://drive.google.com/file/d/1G0RB0Rss2y6DNhPYcezW5wlMTKOqOcxt/view?usp=sharing";
 
         // Global Automation Control Matrix
