@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download My App</title>
+    <style>
+        /* Base Page Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            background-color: #0f172a;
+            color: #ffffff;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Main Landing Page Layout */
+        .landing-container {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .landing-title {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+            background: linear-gradient(to right, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .landing-subtitle {
+            color: #94a3b8;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+
+        /* Initial Big Download Button */
+        .trigger-btn {
+            padding: 16px 40px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #ffffff;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .trigger-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(37, 99, 235, 0.6);
+        }
+
+        .trigger-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Fullscreen Overlay System */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+            z-index: 100;
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Screen 1 & 2 Background (Dark Dramatic Fade) */
+        .dark-overlay {
+            background-color: rgba(15, 23, 42, 0.98);
+        }
+
+        /* Screen 3 Background (Clean White Screen) */
+        .white-overlay {
+            background-color: #ffffff;
+            color: #0f172a;
+        }
+
+        /* Typography and Animation Styles for Content */
+        .fade-text {
+            font-size: 3rem;
+            font-weight: 800;
+            text-align: center;
+            padding: 0 20px;
+            letter-spacing: -0.5px;
+        }
+
+        .sub-author {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            margin-top: 15px;
+            font-weight: 400;
+        }
+
+        /* Medium Size Actual Download Button (Screen 3) */
+        .final-download-btn {
+            padding: 14px 32px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #ffffff;
+            background-color: #2563eb;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+            transition: background-color 0.2s, transform 0.2s;
+        }
+
+        .final-download-btn:hover {
+            background-color: #1d4ed8;
+            transform: scale(1.03);
+        }
+
+        .final-download-btn:active {
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="landing-container">
+        <h1 class="landing-title">Get the Official App</h1>
+        <p class="landing-subtitle">Click below to start the deployment pipeline</p>
+        <button class="trigger-btn" onclick="startSequence()">Download APK</button>
+    </div>
+
+    <div id="screen1" class="overlay dark-overlay">
+        <div class="fade-text" style="background: linear-gradient(to right, #10b981, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+            The AI powered excel
+        </div>
+    </div>
+
+    <div id="screen2" class="overlay dark-overlay">
+        <div class="fade-text">Made by rhut</div>
+        <div class="sub-author">-website by rajveer</div>
+    </div>
+
+    <div id="screen3" class="overlay white-overlay">
+        <button class="final-download-btn" onclick="executeDownload()">Download File</button>
+    </div>
+
+    <script>
+        // APK Drive link target destination
+        const downloadLink = "https://drive.google.com/file/d/1fEmDVPwJquWE_0R_gOXZLp7O4G8UYfPX/view?usp=drivesdk";
+
+        function startSequence() {
+            const s1 = document.getElementById('screen1');
+            const s2 = document.getElementById('screen2');
+            const s3 = document.getElementById('screen3');
+
+            // 1. Fade in Screen 1 immediately
+            s1.classList.add('active');
+
+            // 2. After 2.5 seconds, fade out Screen 1 and fade in Screen 2
+            setTimeout(() => {
+                s1.classList.remove('active');
+                s2.classList.add('active');
+            }, 2500);
+
+            // 3. After another 2.5 seconds (5s total), fade out Screen 2 and reveal the clean white Screen 3
+            setTimeout(() => {
+                s2.classList.remove('active');
+                s3.classList.add('active');
+            }, 5000);
+        }
+
+        function executeDownload() {
+            // Opens your Google Drive file interface directly in a clean browser window
+            window.open(downloadLink, '_blank');
+        }
+    </script>
+</body>
+</html>
